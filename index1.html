@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Kablammo&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+     <!-- <div class="mainbox">
+        <div class="apibox">
+
+        </div>
+    </div> -->
+    <input type="search" placeholder="region" id="input">
+                    <a class="button" href="index1.html">search</a>
+<div id="container">
+    <!-- <div class="mainbox">
+        <div class="apibox">
+         <div class="box1">hi</div>
+
+        </div> -->
+    </div>
+</div>
+    
+</body>
+<script>
+    const bil =document.querySelector('.apibox')
+    
+
+    
+const container = document.querySelector('#container')
+// const fapoo = 'fa-poo-storm'
+// // if(data)
+//  const logo = `<i class="fa-solid ${fapoo}"id="logo"></i>`
+// var input = document.querySelector('#input').value
+var input = "mexico";
+
+// document.querySelector('.button').addEventListener('click',()=>{
+//     //  input = input = document.querySelector('#input').value
+//     // console.log(input = input = document.querySelector('#input').value)
+//     })
+
+
+// start:
+const request = new XMLHttpRequest()
+request.open('GET', `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=b165970014fffdd30ff1670de1b6fa58`)
+// if(document.querySelector('#input').value != null)
+// {
+//     input = document.querySelector('#input').value
+//     //  repeat:goto start
+// }
+request.send();
+request.addEventListener('load',function() {
+    const data = JSON.parse(this.responseText);
+    // console.log("hello")
+    console.log(data);
+    // var fapoo
+ if(data.weather[0].main=== "Clear")
+ {
+    //  var fapoo= 'fa-poo-storm'
+    fapoo= 'fa-sun';
+    console.log(data.weather[0].main)
+    console.log(input)
+}
+else if (data.weather[0].main=== "Clouds")
+{
+    
+      var fapoo= 'fa-cloud';
+      console.log(data.weather[0].main)
+      console.log(input)
+}
+else if (data.weather[0].main=== "Rain")
+{
+    
+      var fapoo= 'fa-cloud-showers-water'
+      console.log(data.weather[0].main)
+      console.log(input)
+}
+//  console.log(fapoo)
+
+ const logo = `<i class="fa-solid ${fapoo}"id="logo"></i>`
+    
+    const htmldata= `<div class="mainbox">
+        <div class="apibox">
+            <div class="box">
+                <div class="childbox">
+                    ${logo}
+                    </div>
+
+
+
+                </div>                           
+            <div class="box1"><div class="child1">Temparature:&nbsp${Math.round(data.main.temp)-273}</div>
+            <div class="child">Feel likes: ${data.main.feels_like}</div>
+        </div> 
+        <div class="box1">
+            <div class="child1">Temp min:&nbsp${data.main.temp_min}</div>
+            <div class="child">temp max ${data.main.temp_max}</div>
+            </div>
+            <div class="box1">
+            <div class="child1">pressure:&nbsp${data.main.pressure}</div>
+            <div class="child">humidity:${data.main.humidity}</div>
+            </div>
+
+        
+        </div>
+        
+                </div>
+
+        </div>
+    </div>`
+
+    container.insertAdjacentHTML("afterbegin",htmldata);
+
+    
+})
+
+
+
+
+</script>
+</html>
